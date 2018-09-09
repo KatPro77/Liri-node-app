@@ -23,6 +23,7 @@ var getSongs = function () {
             console.log("This song's name is: " + data.tracks.items[8].name);
             console.log("Preview url for this track: " + data.tracks.items[8].preview_url);
             console.log("This song is from the album: " + data.tracks.items[8].album.name);
+            console.log("=======================================================");
         });
       } else {
             // user's song choice, or from random.txt
@@ -37,6 +38,8 @@ var getSongs = function () {
             });
         }
     }
+
+    getSongs();
 
 // // function that takes two parameters to run the app, the node command, and then what the user searches
 var chooseCmd = function (nodeCmd, searchArg) {
