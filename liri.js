@@ -32,21 +32,23 @@ var getSongs = function () {
             if (err) {
                 return console.log('Error occurred: ' + err);
             }
+            console.log("===================================");
             console.log("This song is from the artist(s): " + data.tracks.items[0].artists[0].name);
             console.log("This song's name is: " + data.tracks.items[0].name);
             console.log("Preview url for this track: " + data.tracks.items[0].preview_url);
             console.log("This song is from the album: " + data.tracks.items[0].album.name);
+            console.log("===================================");
         });
     }
 }
 
-getSongs();
+// getSongs();
 
 var getMovies = function(movieName) {
 
 //OMDB API - http://www.omdbapi.com/?i=tt3896198&apikey=67b54177
 //http://www.omdbapi.com/?apikey=[yourkey]&
-request("http://www.omdbapi.com/?i=tt3896198&apikey=67b54177&?t=" + movieName, function (err, response, body) {
+request("http://www.omdbapi.com/?t=" + movieName + "&apikey=67b54177&", function (err, response, body) {
     console.log('error:', err); // Print the error if one occurred
     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
     
@@ -67,7 +69,26 @@ request("http://www.omdbapi.com/?i=tt3896198&apikey=67b54177&?t=" + movieName, f
 
 }
 
-getMovies();
+// getMovies();
+
+// function to read text from txt file
+var readData = function() {
+    fs.readFile("./random.txt", "utf8", function(err, data) {
+
+       if (err) {
+            return console.log(err);
+        }
+
+        var dataArr = data.split(",");
+
+        if (dataArr.length == 2) {
+            chooseCmd(dataArr[0], dataArr[1]);
+        } else if (dataArr.length == 1) {
+            chooseCmd(dataArr[0]);
+        }
+    });
+};
+
 
 // // function that takes two parameters to run the app, the node command, and then what the user searches
 var chooseCmd = function (nodeCmd, searchArg) {
